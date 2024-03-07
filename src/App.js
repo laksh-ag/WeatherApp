@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import Tab from './Tab';
+import TabContent from './TabContent';
+
+const cities = ['Rio De Janerio', 'Beijing', 'Los Angeles'];
 
 function App() {
+  const [activeTab, setActiveTab] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="tabs">
+        {cities.map((city, index) => (
+          <Tab
+            key={index}
+            index={index}
+            activeTab={activeTab}
+            onClick={() => setActiveTab(index)}
+          >
+            {city}
+          </Tab>
+        ))}
+      </div>
+      <TabContent city={cities[activeTab]} />
     </div>
   );
 }
